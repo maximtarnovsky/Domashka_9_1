@@ -1,10 +1,8 @@
-def get_mask_card_number(card_number: int) -> str:
+def get_mask_card_number(card_number: str) -> str:
     """Функция маскировки номера банковской карты"""
-    card_number_str = str(card_number)
-    return f"{card_number_str[:4]} {card_number_str[4:6]}** **** {card_number_str[12:]}"
+    return f"{card_number[:-12]} {card_number[-12:-10]}** **** {card_number[-4:]}"
 
 
-def get_mask_account(account_number: int) -> str:
+def get_mask_account(account_number: str) -> str:
     """Функция маскировки номера банковского счета"""
-    account_number_str = str(account_number)
-    return f"**{account_number_str[16:]}"
+    return f"{account_number[:5]}**{account_number[-4:]}"
