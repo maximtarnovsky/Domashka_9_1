@@ -29,7 +29,7 @@ IT-отдел крупного банка делает новую фичу дл�
 
 1. Клонируйте репозиторий удобным способом:
 ```
-git@github.com:
+git@github.com:maximtarnovsky/Domashka_9_1.git
 ```
 ```
 https://github.com/maximtarnovsky/Domashka_9_1.git
