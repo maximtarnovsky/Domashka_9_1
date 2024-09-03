@@ -39,6 +39,10 @@ https://github.com/maximtarnovsky/Domashka_9_1.git
 ```
 poetry install
 ```
+## Тестирование
+* добавлены тесты модуля masks
+* добавлены тесты модуля widget
+* добавлены тесты модуля processing
 
 ## Использование:
 
