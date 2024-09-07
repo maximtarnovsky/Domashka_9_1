@@ -78,59 +78,88 @@ transactions = (
     ]
 )
 
+transactions1 = []
 
 
 
 
-
-# def filter_by_currency(transactions: list, find_curr: str) -> dict:
+# def filter_by_currency(transactions: list, find_curr: str, non_result: str = "Нет транзакций") -> iter:
 #     """Функция принимает на вход список словарей с транзакциями, и
 #     возвращает итератор, поочередно выдающий транзакции с заданной валютой"""
-#     for transaction in transactions:
-#         if transaction["operationAmount"]["currency"]["code"] == find_curr:
-#         # if transaction.get("operationAmount", {}).get("currency", {}).get("code") == find_curr:
-#             yield transaction
+#     if transactions == []:
+#         yield non_result
+#     else:
+#         for transaction in transactions:
+#             if transaction.get("operationAmount").get("currency").get("code") == find_curr:
+#                 yield transaction
 #
 #
-
-
-    # x for x in transactions if x["operationAmount" ["currency" ["code"]]] == find_curr:
-    #     return x
-
-
+#
 # usd_transactions = filter_by_currency(transactions, "USD")
-# for _ in range(5):
+# for _ in range(3):
 #     print(next(usd_transactions))
 
+#
+# usd_transactions = filter_by_currency(transactions, "USD")
+# while True:
+#     try:
+#         for _ in range(5):
+#             print(next(usd_transactions))
+#     except StopIteration:
+#         print('Генератор исчерпан')
+#         break
 
-usd_transactions = filter_by_currency(transactions, "USD")
-while True:
-    try:
-        for _ in range(5):
-            print(next(usd_transactions))
-    except StopIteration:
-        print('Генератор исчерпан')
-        break
+# rub_transactions = filter_by_currency(transactions, "RUB")
+# while True:
+#     try:
+#         for _ in range(2):
+#             print(next(rub_transactions))
+#     except StopIteration:
+#         print('Генератор исчерпан')
+#         break
 
 
 # Напишите генератор transaction_descriptions , который принимает список
 # словарей с транзакциями и возвращает описание каждой операции по очереди.
 
-def transaction_descriptions(transactions: list) -> str:
-    """Генератор, который принимает список словарей с транзакциями
-    и возвращает описание каждой операции по очереди"""
-    for transaction in transactions:
-        yield transaction["description"]
-
+# def transaction_descriptions(transactions: list, non_result: str = "Нет транзакций") -> str:
+#     """Генератор, который принимает список словарей с транзакциями
+#     и возвращает описание каждой операции по очереди"""
+#     if transactions == []:
+#         yield non_result
+#     else:
+#         for transaction in transactions:
+#             yield transaction.get("description")
+#
 # descriptions = transaction_descriptions(transactions)
-# for _ in range(2):
+# for _ in range(1):
 #     print(next(descriptions))
 
-descriptions = transaction_descriptions(transactions)
-while True:
-    try:
-        for _ in range(5):
-            print(next(descriptions))
-    except StopIteration:
-        print('Генератор исчерпан')
-        break
+# descriptions = transaction_descriptions(transactions1)
+# while True:
+#     try:
+#         for _ in range(10):
+#             print(next(descriptions))
+#     except StopIteration:
+#         print('Генератор исчерпан')
+#         break
+
+
+# Создайте генератор card_number_generator, который выдает номера банковских карт в формате
+# XXXX XXXX XXXX XXXX, где X — цифра номера карты. Генератор может сгенерировать номера карт
+# в заданном диапазоне от 0000 0000 0000 0001 до 9999 9999 9999 9999.
+# Генератор должен принимать начальное и конечное значения для генерации диапазона номеров.
+
+
+def card_number_generator(start: int, finish: int) -> str:
+    """Генератор принимает начальное и конечное значения для генерации диапазона номеров, а выдает
+    номера банковских карт в формате XXXX XXXX XXXX XXXX, где X — цифра номера карты. Генератор может
+    сгенерировать номера карт в заданном диапазоне от 0000 0000 0000 0001 до 9999 9999 9999 9999"""
+    for i in range(start, finish):
+        card_number = str(i)
+        while len(card_number) < 16:
+            card_number = "0" + card_number
+        yield f"{card_number[:4]} {card_number[4:8]} {card_number[8:12]} {card_number[12:]}"
+
+for card_number in card_number_generator(1, 10):
+    print(card_number)
