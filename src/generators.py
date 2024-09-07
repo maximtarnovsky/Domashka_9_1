@@ -83,15 +83,15 @@ transactions = (
 
 
 
-def filter_by_currency(transactions: list, find_curr: str) -> dict:
-    """Функция принимает на вход список словарей с транзакциями, и
-    возвращает итератор, поочередно выдающий транзакции с заданной валютой"""
-    for transaction in transactions:
-        if transaction["operationAmount"]["currency"]["code"] == find_curr:
-        # if transaction.get("operationAmount", {}).get("currency", {}).get("code") == find_curr:
-            yield transaction
-
-
+# def filter_by_currency(transactions: list, find_curr: str) -> dict:
+#     """Функция принимает на вход список словарей с транзакциями, и
+#     возвращает итератор, поочередно выдающий транзакции с заданной валютой"""
+#     for transaction in transactions:
+#         if transaction["operationAmount"]["currency"]["code"] == find_curr:
+#         # if transaction.get("operationAmount", {}).get("currency", {}).get("code") == find_curr:
+#             yield transaction
+#
+#
 
 
     # x for x in transactions if x["operationAmount" ["currency" ["code"]]] == find_curr:
@@ -112,3 +112,25 @@ while True:
         print('Генератор исчерпан')
         break
 
+
+# Напишите генератор transaction_descriptions , который принимает список
+# словарей с транзакциями и возвращает описание каждой операции по очереди.
+
+def transaction_descriptions(transactions: list) -> str:
+    """Генератор, который принимает список словарей с транзакциями
+    и возвращает описание каждой операции по очереди"""
+    for transaction in transactions:
+        yield transaction["description"]
+
+# descriptions = transaction_descriptions(transactions)
+# for _ in range(2):
+#     print(next(descriptions))
+
+descriptions = transaction_descriptions(transactions)
+while True:
+    try:
+        for _ in range(5):
+            print(next(descriptions))
+    except StopIteration:
+        print('Генератор исчерпан')
+        break
